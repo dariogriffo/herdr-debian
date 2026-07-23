@@ -1,0 +1,31 @@
+#!/usr/bin/make -f
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+HERDR_VERSION := $(shell dpkg-parsechangelog -S Version | sed 's/[-~].*//')
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+
+override_dh_auto_build:
+	@arch="$(DEB_HOST_ARCH)"; \
+	case "$$arch" in \
+		amd64) HERDR_ASSET="herdr-linux-x86_64" ;; \
+		arm64) HERDR_ASSET="herdr-linux-aarch64" ;; \
+		*) echo "Unsupported architecture: $$arch"; exit 1 ;; \
+	esac; \
+	echo "Downloading $$HERDR_ASSET for $(HERDR_VERSION)..."; \
+	wget -q "https://github.com/ogulcancelik/herdr/releases/download/v$(HERDR_VERSION)/$$HERDR_ASSET" -O herdr; \
+	chmod 755 herdr
+
+override_dh_auto_install:
+	install -D -m 755 herdr debian/herdr/usr/bin/herdr
+
+override_dh_auto_test:
+
+override_dh_auto_clean:
+	rm -f herdr
+
+override_dh_strip:
+
+override_dh_shlibdeps:

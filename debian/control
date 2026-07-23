@@ -1,0 +1,17 @@
+Source: herdr
+Section: utils
+Priority: optional
+Maintainer: Dario Griffo <dariogriffo@gmail.com>
+Build-Depends: debhelper-compat (= 13), wget, ca-certificates
+Standards-Version: 4.6.2
+Homepage: https://herdr.dev
+Rules-Requires-Root: no
+
+Package: herdr
+Architecture: amd64 arm64
+Depends: ${misc:Depends}
+Description: terminal workspace manager for AI coding agents
+ herdr is an agent multiplexer that lives in your terminal. It provides a
+ terminal workspace manager for running and orchestrating multiple AI coding
+ agents side by side, with sessions, workspaces and remotes driven from a
+ keyboard-friendly TUI.
