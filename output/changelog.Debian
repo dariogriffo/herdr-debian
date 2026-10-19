@@ -1,4 +1,4 @@
-herdr (FULL_VERSION) DIST; urgency=low
+herdr (FULL_VERSION) stable; urgency=low
 
   * Automated packaging of herdr FULL_VERSION for DIST.
 
